@@ -5,5 +5,5 @@
   "hacs": "2.0.5",
   "render_readme": true,
   "zip_release": true,
-  "filename": "llm_intents_void.zip"
+  "filename": "Source.zip"
 }
