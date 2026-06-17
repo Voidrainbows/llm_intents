@@ -60,6 +60,10 @@ SEARCH_CONF_ENABLED_MAP = [
         lambda data: data.get(CONF_SEARCH_PROVIDER) == CONF_SEARCH_PROVIDER_SEARXNG,
         SearXngSearchTool,
     ),
+    (
+        lambda data: data.get(CONF_SEARCH_PROVIDER) == "mcp",
+        MCPWebSearchTool,
+    ),
     (CONF_GOOGLE_PLACES_ENABLED, FindPlacesTool),
     (CONF_GOOGLE_ROUTES_ENABLED, GetRouteTool),
     (CONF_YOUTUBE_ENABLED, SearchYouTubeTool),
