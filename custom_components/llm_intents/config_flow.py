@@ -1122,9 +1122,11 @@ class LlmIntentsOptionsFlow(config_entries.OptionsFlowWithReload):
         self, user_input: dict[str, Any] | None = None
     ) -> config_entries.FlowResult:
         """Handle Home Control (override Assist) configuration step in options flow."""
+    
         if user_input is None:
             opts = {**self.config_entry.data, **(self.config_entry.options or {})}
             base_schema = await get_home_control_schema(self.hass)
+    
             schema = vol.Schema(
                 {
                     vol.Optional(
@@ -1134,14 +1136,19 @@ class LlmIntentsOptionsFlow(config_entries.OptionsFlowWithReload):
                     **base_schema.schema,
                 }
             )
+    
             schema = self.add_suggested_values_to_schema(schema, opts)
+    
             return self.async_show_form(
                 step_id=STEP_HOME_CONTROL,
                 data_schema=schema,
             )
-                
-    self.config_data.update(user_input)
-    return self.async_create_entry(data=self.config_data)
+    
+        self.config_data.update(user_input)
+        return self.async_create_entry(data=self.config_data)
 
-    async def async_step_mcp_websearch(self, user_input=None):
+    async def async_step_mcp_websearch(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Handle MCP Websearch configuration step in options flow."""
         return await self.handle_step(STEP_MCP_WEBSERACH, user_input)
