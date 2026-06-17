@@ -1,18 +1,18 @@
 {
-  "domain": "llm_intents",
+  "domain": "llm_intents_void",
   "name": "Tools for Assist",
   "after_dependencies": ["intent"],
   "codeowners": [
-    "@skye-harris"
+    "@voidrainbows"
   ],
   "config_flow": true,
   "dependencies": ["intent"],
-  "documentation": "https://github.com/skye-harris/llm_intents",
+  "documentation": "https://github.com/voidrainbows/llm_intents_void",
   "integration_type": "service",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/skye-harris/llm_intents/issues",
+  "issue_tracker": "https://github.com/voidrainbows/llm_intents_void/issues",
   "loggers": [
-    "custom_components.llm_intents"
+    "custom_components.llm_intents_void"
   ],
   "requirements": [
     "sympy>=1.14.0"
