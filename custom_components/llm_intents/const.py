@@ -5,7 +5,7 @@ This module defines configuration keys and domain names for various intent
 integrations.
 """
 
-DOMAIN = "llm_intents"
+DOMAIN = "llm_intents_void"
 ADDON_NAME = "Tools for Assist"
 
 SEARCH_API_NAME = "Search Services"
@@ -44,8 +44,9 @@ CONF_SEARCH_PROVIDER = "search_provider"
 CONF_SEARCH_PROVIDER_BRAVE = "Brave"
 CONF_SEARCH_PROVIDER_BRAVE_LLM = "Brave LLM Context"
 CONF_SEARCH_PROVIDER_SEARXNG = "SearXNG"
-CONF_SEARCH_PROVIDER_MCP = "mcp"
-CONF_MCP_URL = "mcp_url"
+CONF_MCP_WEBSERACH_ENABLED = "mcp_websearch_enabled"
+CONF_MCP_WEBSERACH_URL = "mcp_websearch_url"
+CONF_MCP_WEBSERACH_API_KEY = "mcp_websearch_api_key"
 
 CONF_SEARCH_PROVIDERS = {
     "Brave": CONF_SEARCH_PROVIDER_BRAVE,
