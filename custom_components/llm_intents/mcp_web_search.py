@@ -1,3 +1,13 @@
+import logging
+from http import HTTPStatus
+
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
+
+from .base_web_search import SearchWebTool
+
+_LOGGER = logging.getLogger(__name__)
+
+
 class MCPWebSearchTool(SearchWebTool):
     """Web search tool backed by MCP server."""
 
