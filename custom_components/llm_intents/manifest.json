@@ -1,5 +1,5 @@
 {
-  "domain": "llm_intents",
+  "domain": "llm_intents_void",
   "name": "Tools for Assist",
   "after_dependencies": ["intent"],
   "codeowners": [
