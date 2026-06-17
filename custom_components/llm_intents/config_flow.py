@@ -88,6 +88,9 @@ from .const import (
     PROVIDER_BRAVE,
     PROVIDER_GOOGLE,
     SERVICE_DEFAULTS,
+    CONF_MCP_WEBSERACH_ENABLED = "mcp_websearch_enabled",
+    CONF_MCP_WEBSERACH_URL = "mcp_websearch_url",
+    CONF_MCP_WEBSERACH_API_KEY = "mcp_websearch_api_key",
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -111,6 +114,7 @@ STEP_HOME_CONTROL = "home_control"
 STEP_CONFIGURE_SEARCH = "configure"
 STEP_CONFIGURE_WEATHER = "configure_weather"
 STEP_CONFIGURE_BASIC_UTILITIES = "configure_basic_utilities"
+STEP_MCP_WEBSERACH = "mcp_websearch"
 
 
 class NullableNumberSelector(NumberSelector):
@@ -153,6 +157,7 @@ def get_step_user_data_schema(hass: HomeAssistant) -> vol.Schema:
         vol.Optional(CONF_WEATHER_ENABLED, default=False): bool,
         vol.Optional(CONF_BASIC_UTILITIES_ENABLED, default=False): bool,
         vol.Optional(CONF_HOME_CONTROL_ENABLED, default=False): bool,
+        vol.Optional(CONF_MCP_WEBSERACH_ENABLED, default=False): bool,
     }
     return vol.Schema(schema)
 
@@ -547,6 +552,14 @@ async def get_brave_llm_schema(
     """Return the static schema for Brave Search configuration."""
     return await get_brave_schema(hass, is_llm_context_search=True)
 
+async def get_mcp_websearch_schema(hass: HomeAssistant) -> vol.Schema:
+    return vol.Schema(
+        {
+            vol.Required(CONF_MCP_WEBSERACH_URL): str,
+            vol.Optional(CONF_MCP_WEBSERACH_API_KEY): str,
+            vol.Optional("num_results", default=5): int,
+        }
+    )
 
 async def enumerate_tools(hass: HomeAssistant) -> list[llm.Tool]:
     """Enumerate available tools for the Assist API."""
@@ -600,6 +613,7 @@ SEARCH_STEP_ORDER = {
     STEP_GOOGLE_ROUTES: [CONF_GOOGLE_ROUTES_ENABLED, get_google_routes_schema],
     STEP_YOUTUBE: [CONF_YOUTUBE_ENABLED, get_youtube_schema],
     STEP_WIKIPEDIA: [CONF_WIKIPEDIA_ENABLED, get_wikipedia_schema],
+    STEP_MCP_WEBSERACH: [CONF_MCP_WEBSERACH_ENABLED,get_mcp_websearch_schema],
 }
 
 WEATHER_STEP_ORDER = {
@@ -1125,6 +1139,9 @@ class LlmIntentsOptionsFlow(config_entries.OptionsFlowWithReload):
                 step_id=STEP_HOME_CONTROL,
                 data_schema=schema,
             )
+                
+    self.config_data.update(user_input)
+    return self.async_create_entry(data=self.config_data)
 
-        self.config_data.update(user_input)
-        return self.async_create_entry(data=self.config_data)
+    async def async_step_mcp_websearch(self, user_input=None):
+        return await self.handle_step(STEP_MCP_WEBSERACH, user_input)
