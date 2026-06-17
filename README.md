@@ -27,7 +27,7 @@ Additionally, a customisable clone of Home Assistants inbuilt `Assist` tooling A
 Have [HACS](https://hacs.xyz/) installed, this will allow you to update easily.
 
 * Adding Tools for Assist to HACS can be using this button:
-  [![image](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=skye-harris&repository=llm_intents&category=integration)
+  [![image](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=voidrainbows&repository=llm_intents_void&category=integration)
 
 <br>
 
